@@ -5,30 +5,13 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
-
-# Import json
 import json
 
-# Print dataset
 from st_aggrid import AgGrid
 from st_aggrid import GridOptionsBuilder
 
-# => Load csv
-@st.cache_data
-def load_data(file_path):
-    return pd.read_csv(file_path)
-vet_df = load_data("vet_app.csv")
-
-
-# => Load translation json file
-def load_translations():
-    with open("translations.json", "r", encoding="utf-8") as f:
-        return json.load(f)
-
-translations = load_translations()
-
 # ---------------------------------------------
-# PAGE CONFIG
+# PAGE CONFIG (MUST BE FIRST STREAMLIT CALL)
 # ---------------------------------------------
 st.set_page_config(
     page_title="Vet Data Explorer",
@@ -36,6 +19,22 @@ st.set_page_config(
     layout="wide"
 )
 
+# ---------------------------------------------
+# FUNCTIONS
+# ---------------------------------------------
+@st.cache_data
+def load_data(file_path):
+    return pd.read_csv(file_path)
+
+def load_translations():
+    with open("translations.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+
+# ---------------------------------------------
+# LOAD DATA
+# ---------------------------------------------
+vet_df = load_data("vet_app.csv")
+translations = load_translations()
 # ---------------------------------------------
 # LANGUAGE MENU
 # ---------------------------------------------
