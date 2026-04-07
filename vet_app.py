@@ -224,18 +224,37 @@ with tab3:
 # ---------------------------------------------
 with tab4:
     st.subheader(t["dataset_phrase"])
+    col1, col2, col3 = st.columns(3)
 
-    gb = GridOptionsBuilder.from_dataframe(vet_df)
-    gb.configure_default_column(
-        filter=True,
-        sortable=True,
-        resizable=True
-    )
+    with col1:
+        type_filter = st.multiselect(
+            t["breed"],
+            vet_df["breed"].dropna().unique()
+        )
 
-    gridOptions = gb.build()
+    with col2:
+        country_filter = st.multiselect(
+            t["color"],
+            vet_df["color"].dropna().unique()
+        )
 
-    AgGrid(
-        vet_df,
-        gridOptions=gridOptions,
-        height=500
-    )
+    with col3:
+        year_filter = st.multiselect(
+            t["year"],
+            sorted(vet_df["year"].dropna().unique())
+        )
+
+
+    new_df = vet_df.copy()
+
+    if type_filter:
+        new_df = new_df[new_df["breed"].isin(type_filter)]
+
+    if country_filter:
+        new_df = new_df[new_df["color"].isin(country_filter)]
+
+    if year_filter:
+        new_df = new_df[new_df["year"].isin(year_filter)]
+
+
+    st.dataframe(new_df, width='stretch')
