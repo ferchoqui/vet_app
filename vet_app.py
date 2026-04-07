@@ -7,9 +7,6 @@ import numpy as np
 import plotly.express as px
 import json
 
-from st_aggrid import AgGrid
-from st_aggrid import GridOptionsBuilder
-
 # ---------------------------------------------
 # PAGE CONFIG
 # ---------------------------------------------
