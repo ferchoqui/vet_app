@@ -11,7 +11,7 @@ from st_aggrid import AgGrid
 from st_aggrid import GridOptionsBuilder
 
 # ---------------------------------------------
-# PAGE CONFIG (MUST BE FIRST STREAMLIT CALL)
+# PAGE CONFIG
 # ---------------------------------------------
 st.set_page_config(
     page_title="Vet Data Explorer",
